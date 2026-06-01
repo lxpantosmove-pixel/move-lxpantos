@@ -5,15 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>프리미엄 케어 서비스 안내</title>
 
-    <style>
-        /* ── 1. 다운로드한 NotoSansKR-Regular 폰트 등록 ── */
-        @font-face {
-            font-family: 'Noto Sans KR';
-            src: url('./NotoSansKR-Regular.ttf') format('truetype');
-            font-weight: 500; 
-            font-style: normal;
-        }
+    <!-- 구글 웹폰트 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500;700;800&display=swap" rel="stylesheet">
 
+    <style>
         :root {
             --brand-color: rgb(167, 43, 42); 
             --brand-light: rgba(167, 43, 42, 0.06);
@@ -25,14 +22,13 @@
 
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         
-        /* ── 2. 전체 페이지에 Noto Sans KR 적용 ── */
         body { 
             font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; 
             background-color: var(--bg-gray); 
             margin: 0; padding: 0; color: var(--text-main); 
         }
 
-        /* 💡 빨간색 상단 헤더 영역 높이 축소 (55px -> 40px) */
+        /* 상단 헤더 영역 */
         .header {
             background: linear-gradient(135deg, var(--brand-color) 0%, #7a1b1a 100%);
             color: white;
@@ -42,14 +38,11 @@
             border-bottom-right-radius: 35px;
             box-shadow: 0 8px 24px rgba(167, 43, 42, 0.2);
         }
-        /* 💡 헤더 글자 크기 축소 (1.65rem -> 1.45rem) */
         .header h1 { font-size: 1.45rem; margin: 0; font-weight: 800; letter-spacing: -0.5px; }
-        /* 💡 헤더 부제목 크기 축소 (0.98rem -> 0.9rem) */
         .header p { font-size: 0.9rem; opacity: 0.85; margin-top: 10px; font-weight: 300; }
 
         .container { padding: 25px 20px; max-width: 500px; margin: 0 auto; }
         
-        /* 💡 아이콘 박스 크기 및 이모지 크기 소폭 축소 */
         .icon-box {
             width: 52px;
             height: 52px;
@@ -69,7 +62,8 @@
             gap: 16px;
             margin-top: 10px;
         }
-        /* 💡 메인 메뉴 버튼 패딩 축소로 높이 조절 (24px -> 18px) */
+        
+        /* 메인 메뉴 버튼 */
         .btn-main {
             background: #ffffff;
             border-radius: 22px;
@@ -97,16 +91,14 @@
             flex-direction: column;
             justify-content: center;
         }
-        /* 💡 메인 메뉴 제목 크기 축소 (1.25rem -> 1.15rem) */
         .menu-text h2 { font-size: 1.15rem; margin: 0 0 4px 0; font-weight: 800; letter-spacing: -0.5px; }
-        /* 💡 메인 메뉴 설명 크기 축소 (0.9rem -> 0.85rem) */
         .menu-text p { font-size: 0.85rem; margin: 0; color: var(--text-sub); line-height: 1.4; }
         .btn-arrow { font-size: 1.1rem; font-weight: bold; color: #d0d0d0; padding-left: 10px; }
         .btn-main.highlight .btn-arrow { color: var(--brand-color); }
 
         .btn-main:not(.highlight) .icon-box { background-color: #f1f3f6; }
 
-        /* 💡 상세보기 리스트 카드 패딩 축소로 높이 조금 줄임 (20px -> 15px) */
+        /* 상세보기 리스트 카드 */
         .card {
             background: #ffffff;
             border-radius: 22px;
@@ -128,7 +120,6 @@
         .card-left { display: flex; align-items: center; flex: 1; min-width: 0; }
         .info { flex: 1; padding-left: 15px; padding-right: 8px; min-width: 0; }
 
-        /* 💡 태그 글자 크기 소폭 축소 */
         .info .tag {
             display: inline-block;
             font-size: 0.68rem;
@@ -140,15 +131,28 @@
             margin-bottom: 3px;
         }
 
-        /* 💡 카드 항목 제목 크기 축소 (1.12rem -> 1.02rem) */
         .info h3 { font-size: 1.02rem; margin: 0 0 3px 0; color: #111111; font-weight: 800; }
-        /* 💡 카드 항목 설명 크기 축소 (0.85rem -> 0.8rem) */
-        .info p { font-size: 0.8rem; margin: 0; color: var(--text-sub); line-height: 1.4; word-break: keep-all; }
-
-        /* 💡 상세보기 > 버튼 글자 크기 축소 (0.82rem -> 0.78rem) */
-        .btn-view { color: var(--brand-color); font-weight: 700; font-size: 0.78rem; white-space: nowrap; padding-left: 10px; flex-shrink: 0; }
         
-        /* 💡 이전 화면으로 버튼 여백 축소 */
+        /* 💡 세부 설명을 한 줄로 제한하고 말줄임 처리 */
+        .info p { 
+            font-size: 0.8rem; 
+            margin: 0; 
+            color: var(--text-sub); 
+            line-height: 1.4; 
+            white-space: nowrap; 
+            overflow: hidden; 
+            text-overflow: ellipsis; 
+        }
+
+        /* 💡 상세보기 글자를 없애고 아이콘만 남김 */
+        .btn-icon-arrow { 
+            font-size: 1.05rem; 
+            font-weight: bold; 
+            color: var(--brand-color); 
+            padding-left: 5px; 
+            flex-shrink: 0; 
+        }
+        
         .btn-back { display: block; text-align: center; margin-top: 25px; padding: 15px; background: #e8eaee; color: #565d6d; font-weight: 700; border-radius: 18px; cursor: pointer; font-size: 0.92rem; }
 
         /* 모달 팝업 구조 */
@@ -192,12 +196,9 @@
         .modal-img { width: 100%; display: block; background-color: #eee; }
         
         .modal-desc-box { padding: 18px; }
-        /* 💡 모달 내용 제목 크기 축소 (1.15rem -> 1.05rem) */
         .modal-desc-box h4 { font-size: 1.05rem; margin: 0 0 8px 0; color: #111; font-weight: 800; }
-        /* 💡 모달 내용 본문 크기 축소 (0.92rem -> 0.86rem) */
         .modal-desc-box p { font-size: 0.86rem; color: #555; line-height: 1.5; margin: 0 0 16px 0; word-break: keep-all; }
         
-        /* 💡 안내 표 글자 크기 축소 (0.88rem -> 0.82rem) */
         .price-table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 0.82rem; }
 
         .price-table th, .price-table td { 
@@ -208,13 +209,7 @@
         }
 
         .price-table th { background-color: #f9fafb; color: #333; font-weight: 700; }
-        
-        .price-table td.price { 
-            color: var(--brand-color); 
-            font-weight: 700; 
-            text-align: center !important; 
-            white-space: nowrap; 
-        }
+        .price-table td.price { color: var(--brand-color); font-weight: 700; text-align: center !important; white-space: nowrap; }
 
         .modal-close {
             margin-top: 15px;
@@ -268,12 +263,12 @@
             <div class="card-left">
                 <div class="icon-box">🪛</div>
                 <div class="info">
-                    <span class="tag">안심 설치</span>
+                    <span class="tag">안심설치</span>
                     <h3>무타공 링크TV</h3>
                     <p>전세집도 문제없는 깔끔한 무타공 설치</p>
                 </div>
             </div>
-            <div class="btn-view">상세보기 &gt;</div>
+            <div class="btn-icon-arrow">&gt;</div>
         </div>
             
         <div class="card" onclick="openServiceModal('tvcover')">
@@ -282,10 +277,10 @@
                 <div class="info">
                     <span class="tag">깔끔 마감</span>
                     <h3>TV 틈새커버</h3>
-                    <p>벽걸이TV 옆면을 깔끔하게</p>
+                    <p>벽걸이TV 옆면을 깔끔하게 만들어주는 커버 시공</p>
                 </div>
             </div>
-            <div class="btn-view">상세보기 &gt;</div>
+            <div class="btn-icon-arrow">&gt;</div>
         </div>
       
         <div class="card" onclick="openServiceModal('shelf')">
@@ -294,10 +289,10 @@
                 <div class="info">
                     <span class="tag">공간 수납</span>
                     <h3>시스템 선반</h3>
-                    <p>공간 활용 맞춤 수납 솔루션</p>
+                    <p>공간 활용 맞춤 수납 솔루션 선반 설치</p>
                 </div>
             </div>
-            <div class="btn-view">상세보기 &gt;</div>
+            <div class="btn-icon-arrow">&gt;</div>
         </div>
 
         <div class="card" onclick="openServiceModal('refrigerator')">
@@ -306,10 +301,10 @@
                 <div class="info">
                     <span class="tag">청정 살균</span>
                     <h3>냉장고 클리닝</h3>
-                    <p>보이지 않는 내부 먼지와 곰팡이를 싹</p>
+                    <p>보이지 않는 내부 먼지와 곰팡이를 싹 제거</p>
                 </div>
             </div>
-            <div class="btn-view">상세보기 &gt;</div>
+            <div class="btn-icon-arrow">&gt;</div>
         </div>
       
         <div class="card" onclick="openServiceModal('laundry')">
@@ -318,10 +313,10 @@
                 <div class="info">
                     <span class="tag">토탈 홈케어</span>
                     <h3>세탁실 클리닝</h3>
-                    <p>보이지 않는 곳까지 살균 세척</p>
+                    <p>보이지 않는 곳까지 완벽한 살균 세척</p>
                 </div>
             </div>
-            <div class="btn-view">상세보기 &gt;</div>
+            <div class="btn-icon-arrow">&gt;</div>
         </div>
 
         <div class="card" onclick="openServiceModal('faucet')">
@@ -330,10 +325,10 @@
                 <div class="info">
                     <span class="tag">공간 확보</span>
                     <h3>슬림수전 교체</h3>
-                    <p>세탁기 공간 확보 필수 아이템</p>
+                    <p>세탁기 공간 확보를 위한 필수 아이템</p>
                 </div>
             </div>
-            <div class="btn-view">상세보기 &gt;</div>
+            <div class="btn-icon-arrow">&gt;</div>
         </div>
 
         <div class="card" onclick="openServiceModal('trap')">
@@ -342,10 +337,10 @@
                 <div class="info">
                     <span class="tag">악취·벌레 차단</span>
                     <h3>세탁실 배수트랩 교체</h3>
-                    <p>악취 및 벌레 완벽 차단</p>
+                    <p>하수구 악취 및 유해 벌레 완벽 차단</p>
                 </div>
             </div>
-            <div class="btn-view">상세보기 &gt;</div>
+            <div class="btn-icon-arrow">&gt;</div>
         </div>
 
         <div class="card" onclick="openServiceModal('sinkDrain')">
@@ -354,10 +349,10 @@
                 <div class="info">
                     <span class="tag">위생 관리</span>
                     <h3>싱크대 배수관 관리</h3>
-                    <p>배수관 막힘 및 악취 해결</p>
+                    <p>주방 배수관 막힘 및 악취 근본적 해결</p>
                 </div>
             </div>
-            <div class="btn-view">상세보기 &gt;</div>
+            <div class="btn-icon-arrow">&gt;</div>
         </div>
       
         <div class="btn-back" onclick="showMainMenu()">이전 화면으로</div>
@@ -467,7 +462,7 @@
                     <tr><th>서비스 항목</th><th>비용</th></tr>
                     <tr><td>사전답사</td><td class="price">50,000원</td></tr>
                     <tr><td>무타공 설치전용 브라켓(50-80사이즈)</td><td class="price">270,000원</td></tr>   
-                    <tr><td>링크설치비(하단 무타공)</td><td class="price">300,000원</td></tr>                    
+                    <tr><td>リンク설치비(하단 무타공)</td><td class="price">300,000원</td></tr>                    
                     <tr><td>셋탑숨김(2개 초과시)</td><td class="price">10,000원</td></tr>
                     <tr><td>하단 콘센트형 설치</td><td class="price">30,000원</td></tr>   
                     <tr><td>사운드바 무타공 설치</td><td class="price">60,000원</td></tr>                     
