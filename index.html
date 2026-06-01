@@ -4,23 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>프리미엄 케어 서비스 안내</title>
-    
-    <link rel="stylesheet" type="text/css" href="https://www.lg.co.kr/assets/css/fonts.css">
 
     <style>
+        /* ── 1. 다운로드한 NotoSansKR-Medium 폰트 등록 ── */
+        @font-face {
+            font-family: 'Noto Sans KR';
+            /* 💡 파일 확장자가 .woff2 라면 아래 woff2를 사용하시고, .ttf 라면 ttf로 변경해 주세요 */
+            src: url('./NotoSansKR-Medium.woff2') format('woff2'),
+                 url('./NotoSansKR-Medium.ttf') format('truetype');
+            font-weight: 500; /* Medium 서체이므로 기본 두께를 500으로 지정 */
+            font-style: normal;
+        }
+
         :root {
             --brand-color: rgb(167, 43, 42); 
             --brand-light: rgba(167, 43, 42, 0.06);
             --brand-lighter: rgba(167, 43, 42, 0.02);
             --text-main: #222222;
-            --text-sub: #666666;9
+            --text-sub: #666666;
             --bg-gray: #f6f7f9; 
         }
 
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         
+        /* ── 2. 전체 페이지에 Noto Sans KR 적용 ── */
         body { 
-            font-family: 'LG Smart', 'LG Smart UI', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; 
+            font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; 
             background-color: var(--bg-gray); 
             margin: 0; padding: 0; color: var(--text-main); 
         }
@@ -175,26 +184,23 @@
         .modal-desc-box h4 { font-size: 1.15rem; margin: 0 0 10px 0; color: #111; font-weight: 800; }
         .modal-desc-box p { font-size: 0.92rem; color: #555; line-height: 1.6; margin: 0 0 20px 0; word-break: keep-all; }
         
-        /* ── 금액 줄바꿈 방지 및 모바일 스타일 수정 완료 ── */
         .price-table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.88rem; }
 
-/* 💡 th와 td의 text-align을 center로 수정했습니다 */
-         .price-table th, .price-table td { 
-         border: 1px solid #eaeaea; 
-         padding: 10px 8px; 
-         text-align: center !important; /* 모든 칸을 정중앙 정렬 */
-         vertical-align: middle;
-}
+        .price-table th, .price-table td { 
+            border: 1px solid #eaeaea; 
+            padding: 10px 8px; 
+            text-align: center !important;
+            vertical-align: middle;
+        }
 
-         .price-table th { background-color: #f9fafb; color: #333; font-weight: 700; }
+        .price-table th { background-color: #f9fafb; color: #333; font-weight: 700; }
         
-/* 금액 부분 한 줄 강제 선언 부위 */
-.price-table td.price { 
-    color: var(--brand-color); 
-    font-weight: 700; 
-    text-align: center !important; /* 💡 오른쪽 정렬(right)을 정중앙(center)으로 변경 */
-    white-space: nowrap; /* 금액이 절대 쪼개지지 않고 한 줄로 나옵니다 */
-}
+        .price-table td.price { 
+            color: var(--brand-color); 
+            font-weight: 700; 
+            text-align: center !important; 
+            white-space: nowrap; 
+        }
 
         .modal-close {
             margin-top: 20px;
@@ -244,7 +250,6 @@
 
     <div id="plusService" style="display: none;">
         
-      
         <div class="card" onclick="openServiceModal('linktv')">
             <div class="card-left">
                 <div class="icon-box">🪛</div>
@@ -257,7 +262,7 @@
             <div class="btn-view">상세보기 &gt;</div>
         </div>
             
-              <div class="card" onclick="openServiceModal('tvcover')">
+        <div class="card" onclick="openServiceModal('tvcover')">
             <div class="card-left">
                 <div class="icon-box">📺</div>
                 <div class="info">
@@ -281,7 +286,7 @@
             <div class="btn-view">상세보기 &gt;</div>
         </div>
 
-            <div class="card" onclick="openServiceModal('refrigerator')">
+        <div class="card" onclick="openServiceModal('refrigerator')">
             <div class="card-left">
                 <div class="icon-box">🚿</div>
                 <div class="info">
@@ -292,7 +297,6 @@
             </div>
             <div class="btn-view">상세보기 &gt;</div>
         </div>
-      
       
         <div class="card" onclick="openServiceModal('laundry')">
             <div class="card-left">
@@ -342,9 +346,6 @@
             <div class="btn-view">상세보기 &gt;</div>
         </div>
       
-
- 
-
         <div class="btn-back" onclick="showMainMenu()">이전 화면으로</div>
     </div>
 </div>
@@ -368,7 +369,6 @@
 </div>
 
 <script>
-    // 서비스 상세 정보 및 표 데이터 구조 정의
     const serviceData = {
         shelf: {
             title: "시스템 선반 상세안내",
@@ -428,7 +428,6 @@
                 </table>
             `
         },
-        // 5. 싱크대 배수관 관리 신규 표 데이터 추가
         sinkDrain: {
             title: "싱크대 배수관 관리 상세안내",
             img: "./sinkingfaucet.png",
@@ -444,7 +443,6 @@
                 </table>
             `
         },
-        // 6. 싱크대 폭포수전 신규 표 데이터 추가
         linktv: {
             title: "무타공 링크TV 상세안내",
             img: "./linktv.png",
@@ -455,38 +453,33 @@
                     <tr><th>서비스 항목</th><th>비용</th></tr>
                     <tr><td>사전답사</td><td class="price">50,000원</td></tr>
                     <tr><td>무타공 설치전용 브라켓(50-80사이즈)</td><td class="price">270,000원</td></tr>   
-                    <tr><td>링크설치비(하단 무타공)</td><td class="price">300,000원</td></tr>                    
+                    <tr><td>リンク설치비(하단 무타공)</td><td class="price">300,000원</td></tr>                    
                     <tr><td>셋탑숨김(2개 초과시)</td><td class="price">10,000원</td></tr>
                     <tr><td>하단 콘센트형 설치</td><td class="price">30,000원</td></tr>   
                     <tr><td>사운드바 무타공 설치</td><td class="price">60,000원</td></tr>                     
                 </table>
             `
         },
-      
-       // 7. 냉장고 클리닝
-      // 💡 앞쪽 항목의 닫는 괄호 '},' 뒤에 이어서 붙여넣으세요!
-
-    refrigerator: {
-    title: "냉장고 클리닝 상세안내",
-    img: "./refrigerator cleaning.png",
-    // 내부 줄바꿈을 \n 대신 HTML 환경에 맞게 <br>로 변경하여 가독성을 높였습니다.
-    subTitle: "가족의 건강을 지키는 위생 관리,\n냉장고 완벽 살균 클리닝",
-    desc: "음식물 마름 흔적, 찌든 때, 눈에 보이지 않는 세균과 악취까지 완벽하게 케어합니다. 냉장고 내부 선반을 모두 분해하여 친환경 세제로 세척한 후, 고온 스팀 및 자외선(UV) 살균 시공으로 새것처럼 쾌적한 주방 환경을 만들어 드립니다.",
-    priceTable: `
-        <table class="price-table">
-                  <tr><th>서비스 항목</th><th>항목</th><th>비용</th></tr>
-                    <tr>
-                        <td>냉장고 클리닝</td>
-                        <td>
-                            열교환기 클리닝<br>
-                            스팀세척<br>
-                        </td>
-                        <td class="price">90,000원</td>
-        </table>
-    `
-}, // 💡 만약 이 뒤에 또 다른 서비스 항목이 더 있다면 여기 끝에도 쉼표(,)를 찍어주셔야 합니다!
-      
-                tvcover: {
+        refrigerator: {
+            title: "냉장고 클리닝 상세안내",
+            img: "./refrigerator cleaning.png",
+            subTitle: "가족의 건강을 지키는 위생 관리,\n냉장고 완벽 살균 클리닝",
+            desc: "음식물 마름 흔적, 찌든 때, 눈에 보이지 않는 세균과 악취까지 완벽하게 케어합니다. 냉장고 내부 선반을 모두 분해하여 친환경 세제로 세척한 후, 고온 스팀 및 자외선(UV) 살균 시공으로 새것처럼 쾌적한 주방 환경을 만들어 드립니다.",
+            priceTable: `
+                <table class="price-table">
+                      <tr><th>서비스 항목</th><th>항목</th><th>비용</th></tr>
+                        <tr>
+                            <td>냉장고 클리닝</td>
+                            <td>
+                                열교환기 클리닝<br>
+                                스팀세척<br>
+                            </td>
+                            <td class="price">90,000원</td>
+                        </tr>
+                </table>
+            `
+        },
+        tvcover: {
             title: "TV틈새커버 상세안내",
             img: "./tvbetween.png",
             subTitle: "거실을 더 넓고 깔끔하게,\n벽걸이 TV 틈새 가림막 시공",
@@ -503,9 +496,6 @@
         },
     };
 
-
-          
-          
     function openServiceModal(key) {
         const data = serviceData[key];
         if (!data) return;
@@ -530,11 +520,8 @@
         document.getElementById('mainMenu').style.display = 'none';
         document.getElementById('plusService').style.display = 'block';
         document.getElementById('pageTitle').innerText = '이전설치 PLUS';
-    
-    // 💡 [수정] 내부에 백틱(`) 기호를 사용해 엔터(줄바꿈)가 그대로 먹히도록 설정합니다.
         document.getElementById('pageSubTitle').innerHTML = `설치를 넘어 공간의 가치를 더하는<br>판토스만의 특별한 PLUS 서비스를 만나보세요.`;
-    
-    window.scrollTo(0, 0);
+        window.scrollTo(0, 0);
     }
 
     function showMainMenu() {
