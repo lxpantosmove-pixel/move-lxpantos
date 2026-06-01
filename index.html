@@ -126,4 +126,426 @@
         }
 
         .card-left { display: flex; align-items: center; flex: 1; min-width: 0; }
-        .info { flex: 1
+        .info { flex: 1; padding-left: 15px; padding-right: 8px; min-width: 0; }
+
+        /* 💡 태그 글자 크기 소폭 축소 */
+        .info .tag {
+            display: inline-block;
+            font-size: 0.68rem;
+            font-weight: 700;
+            color: var(--brand-color);
+            background-color: rgba(167, 43, 42, 0.08);
+            padding: 2px 6px;
+            border-radius: 5px;
+            margin-bottom: 3px;
+        }
+
+        /* 💡 카드 항목 제목 크기 축소 (1.12rem -> 1.02rem) */
+        .info h3 { font-size: 1.02rem; margin: 0 0 3px 0; color: #111111; font-weight: 800; }
+        /* 💡 카드 항목 설명 크기 축소 (0.85rem -> 0.8rem) */
+        .info p { font-size: 0.8rem; margin: 0; color: var(--text-sub); line-height: 1.4; word-break: keep-all; }
+
+        /* 💡 상세보기 > 버튼 글자 크기 축소 (0.82rem -> 0.78rem) */
+        .btn-view { color: var(--brand-color); font-weight: 700; font-size: 0.78rem; white-space: nowrap; padding-left: 10px; flex-shrink: 0; }
+        
+        /* 💡 이전 화면으로 버튼 여백 축소 */
+        .btn-back { display: block; text-align: center; margin-top: 25px; padding: 15px; background: #e8eaee; color: #565d6d; font-weight: 700; border-radius: 18px; cursor: pointer; font-size: 0.92rem; }
+
+        /* 모달 팝업 구조 */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85);
+            z-index: 1000;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 16px;
+        }
+        .modal-content {
+            background: white;
+            width: 100%;
+            max-width: 420px;
+            max-height: 80vh; 
+            border-radius: 24px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+        }
+        .modal-header {
+            padding: 15px;
+            text-align: center;
+            background: var(--brand-color);
+            color: white;
+            font-weight: 700;
+            font-size: 1.02rem;
+            flex-shrink: 0;
+        }
+        
+        .modal-body {
+            overflow-y: auto; 
+            padding: 0 0 20px 0;
+            -webkit-overflow-scrolling: touch; 
+        }
+        .modal-img { width: 100%; display: block; background-color: #eee; }
+        
+        .modal-desc-box { padding: 18px; }
+        /* 💡 모달 내용 제목 크기 축소 (1.15rem -> 1.05rem) */
+        .modal-desc-box h4 { font-size: 1.05rem; margin: 0 0 8px 0; color: #111; font-weight: 800; }
+        /* 💡 모달 내용 본문 크기 축소 (0.92rem -> 0.86rem) */
+        .modal-desc-box p { font-size: 0.86rem; color: #555; line-height: 1.5; margin: 0 0 16px 0; word-break: keep-all; }
+        
+        /* 💡 안내 표 글자 크기 축소 (0.88rem -> 0.82rem) */
+        .price-table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 0.82rem; }
+
+        .price-table th, .price-table td { 
+            border: 1px solid #eaeaea; 
+            padding: 8px 6px; 
+            text-align: center !important;
+            vertical-align: middle;
+        }
+
+        .price-table th { background-color: #f9fafb; color: #333; font-weight: 700; }
+        
+        .price-table td.price { 
+            color: var(--brand-color); 
+            font-weight: 700; 
+            text-align: center !important; 
+            white-space: nowrap; 
+        }
+
+        .modal-close {
+            margin-top: 15px;
+            color: #fff;
+            background: rgba(255,255,255,0.18);
+            padding: 10px 45px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            border: 1.5px solid #fff;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1 id="pageTitle">LX판토스 이전설치</h1>
+    <p id="pageSubTitle">원하시는 서비스를 선택해주세요</p>
+</div>
+
+<div class="container">
+    
+    <div id="mainMenu" class="menu-wrapper">
+        <div onclick="window.open('https://move.lxpantos.com/mvinst/m_order.jsp', '_blank')" class="btn-main">
+            <div class="icon-box">📦</div>
+            <div class="menu-info">
+                <div class="menu-text">
+                    <h2>이전설치 접수</h2>
+                    <p>안전하고 신속한<br>가전 이전설치 접수하기</p>
+                </div>
+            </div>
+            <div class="btn-arrow">&gt;</div>
+        </div>
+
+        <div class="btn-main highlight" onclick="showPlusService()">
+            <div class="icon-box">✨</div>
+            <div class="menu-info">
+                <div class="menu-text">
+                    <h2>이전설치 PLUS</h2>
+                    <p>완벽한 설치, 그 이상의 프리미엄 서비스</p>
+                </div>
+            </div>
+            <div class="btn-arrow">&gt;</div>
+        </div>
+    </div>
+
+    <div id="plusService" style="display: none;">
+        
+        <div class="card" onclick="openServiceModal('linktv')">
+            <div class="card-left">
+                <div class="icon-box">🪛</div>
+                <div class="info">
+                    <span class="tag">안심 설치</span>
+                    <h3>무타공 링크TV</h3>
+                    <p>전세집도 문제없는 깔끔한 무타공 설치</p>
+                </div>
+            </div>
+            <div class="btn-view">상세보기 &gt;</div>
+        </div>
+            
+        <div class="card" onclick="openServiceModal('tvcover')">
+            <div class="card-left">
+                <div class="icon-box">📺</div>
+                <div class="info">
+                    <span class="tag">깔끔 마감</span>
+                    <h3>TV 틈새커버</h3>
+                    <p>벽걸이TV 옆면을 깔끔하게</p>
+                </div>
+            </div>
+            <div class="btn-view">상세보기 &gt;</div>
+        </div>
+      
+        <div class="card" onclick="openServiceModal('shelf')">
+            <div class="card-left">
+                <div class="icon-box">👗</div>
+                <div class="info">
+                    <span class="tag">공간 수납</span>
+                    <h3>시스템 선반</h3>
+                    <p>공간 활용 맞춤 수납 솔루션</p>
+                </div>
+            </div>
+            <div class="btn-view">상세보기 &gt;</div>
+        </div>
+
+        <div class="card" onclick="openServiceModal('refrigerator')">
+            <div class="card-left">
+                <div class="icon-box">❄️</div>
+                <div class="info">
+                    <span class="tag">청정 살균</span>
+                    <h3>냉장고 클리닝</h3>
+                    <p>보이지 않는 내부 먼지와 곰팡이를 싹</p>
+                </div>
+            </div>
+            <div class="btn-view">상세보기 &gt;</div>
+        </div>
+      
+        <div class="card" onclick="openServiceModal('laundry')">
+            <div class="card-left">
+                <div class="icon-box">🧼</div>
+                <div class="info">
+                    <span class="tag">토탈 홈케어</span>
+                    <h3>세탁실 클리닝</h3>
+                    <p>보이지 않는 곳까지 살균 세척</p>
+                </div>
+            </div>
+            <div class="btn-view">상세보기 &gt;</div>
+        </div>
+
+        <div class="card" onclick="openServiceModal('faucet')">
+            <div class="card-left">
+                <div class="icon-box">🚿</div>
+                <div class="info">
+                    <span class="tag">공간 확보</span>
+                    <h3>슬림수전 교체</h3>
+                    <p>세탁기 공간 확보 필수 아이템</p>
+                </div>
+            </div>
+            <div class="btn-view">상세보기 &gt;</div>
+        </div>
+
+        <div class="card" onclick="openServiceModal('trap')">
+            <div class="card-left">
+                <div class="icon-box">🚫</div>
+                <div class="info">
+                    <span class="tag">악취·벌레 차단</span>
+                    <h3>세탁실 배수트랩 교체</h3>
+                    <p>악취 및 벌레 완벽 차단</p>
+                </div>
+            </div>
+            <div class="btn-view">상세보기 &gt;</div>
+        </div>
+
+        <div class="card" onclick="openServiceModal('sinkDrain')">
+            <div class="card-left">
+                <div class="icon-box">🫧</div>
+                <div class="info">
+                    <span class="tag">위생 관리</span>
+                    <h3>싱크대 배수관 관리</h3>
+                    <p>배수관 막힘 및 악취 해결</p>
+                </div>
+            </div>
+            <div class="btn-view">상세보기 &gt;</div>
+        </div>
+      
+        <div class="btn-back" onclick="showMainMenu()">이전 화면으로</div>
+    </div>
+</div>
+
+<div id="modal" class="modal" onclick="closeModal()">
+    <div class="modal-content" onclick="event.stopPropagation()">
+        <div id="modalTitle" class="modal-header">서비스 상세안내</div>
+        
+        <div class="modal-body">
+            <img id="modalImg" class="modal-img" src="" alt="상세내용">
+            <div class="modal-desc-box">
+                <h4 id="infoTitle">서비스 안내</h4>
+                <p id="infoText">상세 내용 준비 중입니다.</p>
+                
+                <h4 class="price-title">서비스 비용 안내</h4>
+                <div id="infoPriceTable"></div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-close">닫기</div>
+</div>
+
+<script>
+    const serviceData = {
+        shelf: {
+            title: "시스템 선반 상세안내",
+            img: "./systemselves.png",
+            subTitle: "🛠️ 공간 맞춤형 고중량 시스템 선반",
+            desc: "세탁실 및 다용도실의 무용지물 공간을 200% 활용할 수 있는 프리미엄 맞춤 선반입니다. 고중량 무게도 안전하게 버티는 견고한 프레임 설계와 모던한 디자인으로 깔끔한 공간 수납을 완성합니다.",
+            priceTable: `
+                <table class="price-table">
+                    <tr><th>구분</th><th>비용</th></tr>
+                    <tr><td>설치비용</td><td class="price">35,000원</td></tr>
+                    <tr><td>추가 철거/설치</td><td class="price">5,000원</td></tr>
+                </table>
+            `
+        },
+        laundry: {
+            title: "세탁실 클리닝 상세안내",
+            img: "./laundrycleaning.png",
+            subTitle: "🧼 고압 세척 & 스팀 살균 세척",
+            desc: "벽면의 묵은 때, 타일 사이 곰팡이, 배수구 악취 원인 물질까지 전문 고압 세척 장비와 약품 청소, 연무 살균 케어로 완벽하고 깔끔하게 박멸해 드립니다.",
+            priceTable: `
+                <table class="price-table">
+                  <tr><th>서비스 항목</th><th>항목</th><th>비용</th></tr>
+                    <tr>
+                        <td>세탁실 클리닝</td>
+                        <td>
+                            고압세척<br>
+                            스팀청소<br>
+                            약품청소<br>
+                            연무살균
+                        </td>
+                        <td class="price">90,000원</td>
+                    </tr>
+                </table>
+            `
+        },
+        faucet: {
+            title: "슬림수전 교체 상세안내",
+            img: "./slimfaucet.png",
+            subTitle: "🔧 벽면 밀착형 공간 확보 슬림수전",
+            desc: "대용량 워시타워 설치 시 튀어나온 수도꼭지로 인한 공간 부족 문제를 해결합니다. 벽면에 슬림하게 밀착되는 특수 수전으로 최대 5~10cm의 여유 공간을 확보해 드립니다.",
+            priceTable: `
+                <table class="price-table">
+                    <tr><th>구분</th><th>비용</th></tr>
+                    <tr><td>슬림 수전 세트</td><td class="price">90,000원</td></tr>
+                </table>
+            `
+        },
+        trap: {
+            title: "배수트랩 교체 상세안내",
+            img: "./trap.png",
+            subTitle: "🚫 배수구 악취 및 벌레 차단 솔루션",
+            desc: "세탁기 배수 시 발생하는 하수구 역류 현상을 방지합니다. 하부 관을 통해 올라오는 불쾌한 악취와 유해 벌레를 완벽하게 차단하는 특수 밀폐형 트랩 시공 서비스입니다.",
+            priceTable: `
+                <table class="price-table">
+                    <tr><th>구분</th><th>비용</th></tr>
+                    <tr><td>배수트랩 설치</td><td class="price">45,000원</td></tr>
+                </table>
+            `
+        },
+        sinkDrain: {
+            title: "싱크대 배수관 관리 상세안내",
+            img: "./sinkingfaucet.png",
+            subTitle: "💧 악취 원인 완벽 타파!\n싱크대 배수관 올케어",
+            desc: "주방 악취의 주원인인 배수관 내부 음식물 슬러지와 오염물을 특수 고압 세척으로 제거합니다. 노후 상태에 따라 위생적인 스테인리스 배수통 및 호스 교체 시공도 가능합니다.",
+            priceTable: `
+                <table class="price-table">
+                    <tr><th>서비스 구분</th><th>비용</th></tr>
+                    <tr><td>배수관 청소</td><td class="price">90,000원</td></tr>
+                    <tr><td>배수통교체(플라스틱)</td><td class="price">70,000원</td></tr>
+                    <tr><td>배수통교체(스테인리스)</td><td class="price">90,000원</td></tr>
+                    <tr><td>배수호스 교체</td><td class="price">20,000원</td></tr>
+                </table>
+            `
+        },
+        linktv: {
+            title: "무타공 링크TV 상세안내",
+            img: "./linktv.png",
+            subTitle: "타공없이 깔끔한 벽걸이TV설치,\n 무타공 링크TV",
+            desc: "소중한 우리 집 대리석이나 타일 벽면을 원상태 그대로 완벽하게 보존하는 프리미엄 무타공 시공입니다. 복잡한 주변 기기와 선 정리까지 깔끔하게 숨겨주어, 추후 이사할 때 복구 비용 부담 없이 갤러리 같은 고품격 거실 인테리어를 완성할 수 있습니다.",
+            priceTable: `
+                <table class="price-table">
+                    <tr><th>서비스 항목</th><th>비용</th></tr>
+                    <tr><td>사전답사</td><td class="price">50,000원</td></tr>
+                    <tr><td>무타공 설치전용 브라켓(50-80사이즈)</td><td class="price">270,000원</td></tr>   
+                    <tr><td>링크설치비(하단 무타공)</td><td class="price">300,000원</td></tr>                    
+                    <tr><td>셋탑숨김(2개 초과시)</td><td class="price">10,000원</td></tr>
+                    <tr><td>하단 콘센트형 설치</td><td class="price">30,000원</td></tr>   
+                    <tr><td>사운드바 무타공 설치</td><td class="price">60,000원</td></tr>                     
+                </table>
+            `
+        },
+        refrigerator: {
+            title: "냉장고 클리닝 상세안내",
+            img: "./refrigerator cleaning.png",
+            subTitle: "가족의 건강을 지키는 위생 관리,\n냉장고 완벽 살균 클리닝",
+            desc: "음식물 마름 흔적, 찌든 때, 눈에 보이지 않는 세균과 악취까지 완벽하게 케어합니다. 냉장고 내부 선반을 모두 분해하여 친환경 세제로 세척한 후, 고온 스팀 및 자외선(UV) 살균 시공으로 새것처럼 쾌적한 주방 환경을 만들어 드립니다.",
+            priceTable: `
+                <table class="price-table">
+                      <tr><th>서비스 항목</th><th>항목</th><th>비용</th></tr>
+                        <tr>
+                            <td>냉장고 클리닝</td>
+                            <td>
+                                열교환기 클리닝<br>
+                                스팀세척<br>
+                            </td>
+                            <td class="price">90,000원</td>
+                        </tr>
+                </table>
+            `
+        },
+        tvcover: {
+            title: "TV틈새커버 상세안내",
+            img: "./tvbetween.png",
+            subTitle: "거실을 더 넓고 깔끔하게,\n벽걸이 TV 틈새 가림막 시공",
+            desc: "벽면과 TV 사이의 지저분한 측면 노출을 완벽히 차단하는 전용 프리미엄 커버 시공으로, 먼지 쌓임 방지는 물론 인테리어의 완성도를 극대화합니다.",
+            priceTable: `
+                <table class="price-table">
+                    <tr><th>인치 별</th><th>비용</th></tr>
+                    <tr><td>70인치 미만</td><td class="price">50,000원</td></tr>
+                    <tr><td>70인치 급</td><td class="price">55,000원</td></tr>
+                    <tr><td>80인치 급</td><td class="price">60,000원</td></tr>                    
+                    <tr><td>90인치 이상</td><td class="price">63,000원</td></tr>
+                </table>
+            `
+        },
+    };
+
+    function openServiceModal(key) {
+        const data = serviceData[key];
+        if (!data) return;
+
+        document.getElementById('modalTitle').innerText = data.title;
+        document.getElementById('modalImg').src = data.img;
+        document.getElementById('infoTitle').innerText = data.subTitle;
+        document.getElementById('infoText').innerText = data.desc;
+        document.getElementById('infoPriceTable').innerHTML = data.priceTable;
+        
+        document.querySelector('.modal-body').scrollTop = 0;
+        document.getElementById('modal').style.display = 'flex';
+        document.body.style.overflow = 'hidden'; 
+    }
+
+    function closeModal() {
+        document.getElementById('modal').style.display = 'none';
+        document.body.style.overflow = 'auto'; 
+    }
+
+    function showPlusService() {
+        document.getElementById('mainMenu').style.display = 'none';
+        document.getElementById('plusService').style.display = 'block';
+        document.getElementById('pageTitle').innerText = '이전설치 PLUS';
+        document.getElementById('pageSubTitle').innerHTML = `설치를 넘어 공간의 가치를 더하는<br>판토스만의 특별한 PLUS 서비스를 만나보세요.`;
+        window.scrollTo(0, 0);
+    }
+
+    function showMainMenu() {
+        document.getElementById('plusService').style.display = 'none';
+        document.getElementById('mainMenu').style.display = 'flex';
+        document.getElementById('pageTitle').innerText = 'LX판토스 이전설치';
+        document.getElementById('pageSubTitle').innerText = '원하시는 서비스를 선택해주세요';
+        window.scrollTo(0, 0);
+    }
+</script>
+
+</body>
+</html>
