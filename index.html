@@ -13,7 +13,7 @@
             --brand-light: rgba(167, 43, 42, 0.06);
             --brand-lighter: rgba(167, 43, 42, 0.02);
             --text-main: #222222;
-            --text-sub: #666666;
+            --text-sub: #666666;9
             --bg-gray: #f6f7f9; 
         }
 
@@ -244,6 +244,19 @@
 
     <div id="plusService" style="display: none;">
         
+      
+        <div class="card" onclick="openServiceModal('linktv')">
+            <div class="card-left">
+                <div class="icon-box">🪛</div>
+                <div class="info">
+                    <span class="tag">주방 리폼</span>
+                    <h3>무타공 링크TV</h3>
+                    <p>전세집도 문제없는 깔끔한 무타공 설치</p>
+                </div>
+            </div>
+            <div class="btn-view">상세보기 &gt;</div>
+        </div>
+            
               <div class="card" onclick="openServiceModal('tvcover')">
             <div class="card-left">
                 <div class="icon-box">📺</div>
@@ -329,18 +342,7 @@
             <div class="btn-view">상세보기 &gt;</div>
         </div>
       
-        <div class="card" onclick="openServiceModal('sinkFaucet')">
-            <div class="card-left">
-                <div class="icon-box">🚿</div>
-                <div class="info">
-                    <span class="tag">주방 리폼</span>
-                    <h3>싱크대 폭포수전</h3>
-                    <p>넓은 폭포수 분사로 빠른 세척</p>
-                </div>
-            </div>
-            <div class="btn-view">상세보기 &gt;</div>
-        </div>
-      
+
  
 
         <div class="btn-back" onclick="showMainMenu()">이전 화면으로</div>
@@ -443,16 +445,20 @@
             `
         },
         // 6. 싱크대 폭포수전 신규 표 데이터 추가
-        sinkFaucet: {
-            title: "싱크대 폭포수전 상세안내",
+        linktv: {
+            title: "무타공 링크TV 상세안내",
             img: "https://picsum.photos/id/80/600/400",
-            subTitle: "주방을 고급스럽고 편리하게,\n 폭포수전 교체",
-            desc: "넓고 고르게 분사되는 고급 호텔식 폭포수 주방 수전으로 업그레이드해 드립니다. 세척이 빨라지는 폭포 분사 기능과 미려한 새틴 스테인리스 바디로 뛰어난 인테리어 효과를 줍니다.",
+            subTitle: "타공없이 깔끔한 벽걸이TV설치,\n 무타공 링크TV",
+            desc: "소중한 우리 집 대리석이나 타일 벽면을 원상태 그대로 완벽하게 보존하는 프리미엄 무타공 시공입니다. 복잡한 주변 기기와 선 정리까지 깔끔하게 숨겨주어, 추후 이사할 때 복구 비용 부담 없이 갤러리 같은 고품격 거실 인테리어를 완성할 수 있습니다.",
             priceTable: `
                 <table class="price-table">
-                    <tr><th>수전 모델</th><th>주요 기능</th><th>비용</th></tr>
-                    <tr><td>고급형 폭포수전</td><td>폭포 분사 + 거위목 3W회전형</td><td class="price">145,000원</td></tr>
-                    <tr><td>프리미엄 LED형</td><td>온도 감지 LED 자동 점등 모델</td><td class="price">195,000원</td></tr>
+                    <tr><th>서비스 항목</th><th>비용</th></tr>
+                    <tr><td>사전답사</td><td class="price">50,000원</td></tr>
+                    <tr><td>무타공 설치전용 브라켓(50-80사이즈)</td><td class="price">270,000원</td></tr>   
+                    <tr><td>링크설치비(하단 무타공)</td><td class="price">300,000원</td></tr>                    
+                    <tr><td>셋탑숨김(2개 초과시)</td><td class="price">10,000원</td></tr>
+                    <tr><td>하단 콘센트형 설치</td><td class="price">30,000원</td></tr>   
+                    <tr><td>사운드바 무타공 설치</td><td class="price">60,000원</td></tr>                     
                 </table>
             `
         },
@@ -482,7 +488,7 @@
       
                 tvcover: {
             title: "TV틈새커버 상세안내",
-            img: "./tvbetween.png",
+            img: "https://lxpantosmove.netlify.app/tvbetween.png",
             subTitle: "거실을 더 넓고 깔끔하게,\n벽걸이 TV 틈새 가림막 시공",
             desc: "벽면과 TV 사이의 지저분한 측면 노출을 완벽히 차단하는 전용 프리미엄 커버 시공으로, 먼지 쌓임 방지는 물론 인테리어의 완성도를 극대화합니다.",
             priceTable: `
