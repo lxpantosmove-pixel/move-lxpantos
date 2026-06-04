@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>프리미엄 케어 서비스 안내</title>
 
-    <!-- 구글 웹폰트 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500;700;800&display=swap" rel="stylesheet">
@@ -90,6 +89,7 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
+            text-align: left; /* 좌측 정렬 반영 */
         }
         .menu-text h2 { font-size: 1.15rem; margin: 0 0 4px 0; font-weight: 800; letter-spacing: -0.5px; }
         .menu-text p { font-size: 0.85rem; margin: 0; color: var(--text-sub); line-height: 1.4; }
@@ -118,7 +118,7 @@
         }
 
         .card-left { display: flex; align-items: center; flex: 1; min-width: 0; }
-        .info { flex: 1; padding-left: 15px; padding-right: 8px; min-width: 0; }
+        .info { flex: 1; padding-left: 15px; padding-right: 8px; min-width: 0; text-align: left; /* 좌측 정렬 반영 */ }
 
         .info .tag {
             display: inline-block;
@@ -133,7 +133,7 @@
 
         .info h3 { font-size: 1.02rem; margin: 0 0 3px 0; color: #111111; font-weight: 800; }
         
-        /* 💡 세부 설명을 한 줄로 제한하고 말줄임 처리 */
+        /* 세부 설명을 한 줄로 제한하고 말줄임 처리 */
         .info p { 
             font-size: 0.8rem; 
             margin: 0; 
@@ -144,7 +144,7 @@
             text-overflow: ellipsis; 
         }
 
-        /* 💡 상세보기 글자를 없애고 아이콘만 남김 */
+        /* 상세보기 글자를 없애고 아이콘만 남김 */
         .btn-icon-arrow { 
             font-size: 1.05rem; 
             font-weight: bold; 
@@ -195,7 +195,7 @@
         }
         .modal-img { width: 100%; display: block; background-color: #eee; }
         
-        .modal-desc-box { padding: 18px; }
+        .modal-desc-box { padding: 18px; text-align: left; /* 좌측 정렬 반영 */ }
         .modal-desc-box h4 { font-size: 1.05rem; margin: 0 0 8px 0; color: #111; font-weight: 800; }
         .modal-desc-box p { font-size: 0.86rem; color: #555; line-height: 1.5; margin: 0 0 16px 0; word-break: keep-all; }
         
@@ -235,17 +235,27 @@
     
     <div id="mainMenu" class="menu-wrapper">
         <div onclick="window.open('https://move.lxpantos.com/mvinst/m_order.jsp', '_blank')" class="btn-main">
-            <div class="icon-box">❤️</div>
+            <div class="icon-box">✅</div>
             <div class="menu-info">
                 <div class="menu-text">
                     <h2>이전설치 접수</h2>
-                    <p>안전하고 신속한<br>가전 이전설치 접수하기</p>
+                    <p>정품 자재/전문 장비로 <br>믿을 수 있는 이전설치 접수하기</p>
                 </div>
             </div>
             <div class="btn-arrow">&gt;</div>
         </div>
 
-      
+        <div onclick="window.open('https://move.lxpantos.com/mvinst/m_orderSearch.jsp')" class="btn-main">
+            <div class="icon-box">🔍</div>
+            <div class="menu-info">
+                <div class="menu-text">
+                    <h2>이전설치 조회</h2>
+                    <p>이전설치 주문 조회/변경하기<br> </p>
+                </div>
+            </div>
+            <div class="btn-arrow">&gt;</div>
+        </div>
+
         <div class="btn-main highlight" onclick="showPlusService()">
             <div class="icon-box">✨</div>
             <div class="menu-info">
@@ -284,18 +294,6 @@
             <div class="btn-icon-arrow">&gt;</div>
         </div>
       
-        <div class="card" onclick="openServiceModal('shelf')">
-            <div class="card-left">
-                <div class="icon-box">👗</div>
-                <div class="info">
-                    <span class="tag">공간 수납</span>
-                    <h3>시스템 선반</h3>
-                    <p>공간 활용 맞춤 수납 솔루션 선반 설치</p>
-                </div>
-            </div>
-            <div class="btn-icon-arrow">&gt;</div>
-        </div>
-
         <div class="card" onclick="openServiceModal('refrigerator')">
             <div class="card-left">
                 <div class="icon-box">❄️</div>
@@ -380,7 +378,6 @@
 
 <script>
     const serviceData = {
-
         laundry: {
             title: "세탁실 클리닝 상세안내",
             img: "./laundrycleaning.png",
