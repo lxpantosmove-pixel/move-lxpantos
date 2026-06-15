@@ -365,6 +365,18 @@
             </div>
             <div class="btn-icon-arrow">&gt;</div>
         </div>
+              <div class="card" onclick="openServiceModal('systemselves')">
+            <div class="card-left">
+                <div class="icon-box">👗</div>
+                <div class="info">
+                    <span class="tag">공간 수납</span>
+                    <h3>시스템 선반</h3>
+                    <p>공간 활용 맞춤 수납 솔루션</p>
+                </div>
+            </div>
+            <div class="btn-icon-arrow">&gt;</div>
+        </div>
+
       
         <div class="btn-back" onclick="showMainMenu()">이전 화면으로</div>
     </div>
@@ -387,7 +399,8 @@
     </div>
     <div class="modal-close">닫기</div>
 </div>
-
+  
+  
 <script>
     const serviceData = {
         laundry: {
@@ -435,6 +448,20 @@
                 </table>
             `
         },
+             systemselves: {
+            title: "시스템 선반 상세안내",
+            img: "./systemselves.png",
+            subTitle: "🛠️ 공간 맞춤형 고중량 시스템 선반",
+            desc: "드레스룸 선반 이전 설치를 통해 고객님댁에 딱 맞는 드레스룸 스타일러 설치 공간을 확보해드립니다.",
+            priceTable: `
+                <table class="price-table">
+                    <tr><th>구분</th><th>상세 사양</th><th>비용</th></tr>
+                    <tr><td>설치비용</td><td>가로 800mm 기준</td><td class="price">35,000원</td></tr>
+                    <tr><td>추가 철거/설치</td><td>가로 1000mm / 높이조절</td><td class="price">5,000원</td></tr>
+                </table>
+            `
+        },
+      
         sinkDrain: {
             title: "싱크대 배수관 관리 상세안내",
             img: "./sinkingfaucet.png",
